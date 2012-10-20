@@ -1,0 +1,7 @@
+general_failure=Sorry, we could not process the message. Please try again
+aiaioo_failure=Thanks we received your feedback but our service is  down for the moment , we will come back to you
+empty_message=Please provide a feedback message
+spell_check_file=/root/public/shoutout_engine/spellcheck/big.txt
+aiaioo_failure_cron_seconds=0
+aiaioo_failure_cron_minutes=30
+
