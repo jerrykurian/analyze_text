@@ -4,7 +4,7 @@ import PlayProject._
 
 object ApplicationBuild extends Build {
 
-    val appName         = "shoutout_engine"
+    val appName         = "analyze_text"
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
@@ -13,7 +13,6 @@ object ApplicationBuild extends Build {
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
-      
     )
 
 }

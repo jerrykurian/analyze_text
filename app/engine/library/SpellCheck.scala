@@ -8,7 +8,7 @@ trait SpellCheck {
   val alphabet = 'a' to 'z' toArray
   def train(features: MatchIterator) = (Map[String, Int]() /: features)((m, f) => m + ((f, m.getOrElse(f, 0) + 1)))
   def words(text: String) = ("[%s]+" format alphabet.mkString).r.findAllIn(text.toLowerCase)
-  val dict = train(words(io.Source.fromFile(Messages("""E:\Personal\shoutout\document\big.txt""")).mkString))
+  val dict = train(words(io.Source.fromFile(Messages("spell_check_file")).mkString))
 
   def edits(s: Seq[(String, String)]) = (for ((a, b) <- s; if b.length > 0) yield a + b.substring(1)) ++
     (for ((a, b) <- s; if b.length > 1) yield a + b(1) + b(0) + b.substring(2)) ++
@@ -24,17 +24,22 @@ trait SpellCheck {
 
   val spellCheckAvoidanceExpr = """(.*[\W0-9]+.*)""".r
   def correct(word: String):String = {
+    var isStartingWithCapital = false;
+    if(word(0).isUpper) isStartingWithCapital = true
     
-    //If the word is a single character in lenght, then avoid spell check
+    //If the word is a single character in length, then avoid spell check
     if(word.length()==1){
       return word
     }
+    val spellCheckWord = word.toLowerCase()
     
     // If the word contains some special characters within it then avoid spell check
-    if(spellCheckAvoidanceExpr.pattern.matcher(word).matches()){
+    if(spellCheckAvoidanceExpr.pattern.matcher(spellCheckWord).matches()){
       return word
     }
-    ((-1, word) /: candidates(word))(
-    (max, word) => if (dict(word) > max._1) (dict(word), word) else max)._2
+    val retWord = ((-1, spellCheckWord) /: candidates(spellCheckWord))(
+    (max, spellCheckWord) => if (dict(spellCheckWord) > max._1) (dict(spellCheckWord), spellCheckWord) else max)._2
+    
+    if(isStartingWithCapital) retWord(0).toUpper + retWord.substring(1,retWord.length()) else retWord
   }
 }

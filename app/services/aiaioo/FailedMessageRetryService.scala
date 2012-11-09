@@ -15,11 +15,11 @@ class FailedMessageRetryService extends Runnable {
     failures.foreach({
       failure => {
         try{
-	        Logger.info("Fixing failure " + failure.id.get + " for " + failure.text + " from " + failure.sourceNumber)
-	        val result = TextHandlerService.handle(failure.sourceNumber,failure.text)
-	        Logger.info("Setting Retried")
-	        AiaiooFailure.retried(failure.id.get)
-	        Logger.info("Fixed")
+	      Logger.info("Fixing failure " + failure.id.get + " for " + failure.text + " from " + failure.sourceNumber)
+	      val result = TextHandlerService.handle(failure.sourceNumber,failure.text, failure.createdDate, true)
+	      Logger.info("Setting Retried")
+	      AiaiooFailure.retried(failure.id.get)
+	      Logger.info("Fixed")
         }catch{
           case e:Exception => Logger.error(e.getMessage())
         }

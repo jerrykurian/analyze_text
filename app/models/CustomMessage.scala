@@ -27,14 +27,14 @@ object CustomMessage{
         			.on("sentiment" -> sentiment.id, "branch" -> branch.id, "business" -> business.id).using(parser).singleOpt().getOrElse(null)
         if(message == null){
           message = SQL("""select * from custom_messages 
-        			where sentiment_id = {sentiment} and business_id = {business}""")
+        			where sentiment_id = {sentiment} and business_id = {business} and branch_id is null""")
         			.on("sentiment" -> sentiment.id, "business" -> business.id).using(parser).singleOpt().getOrElse(null)
         }else{
           return message
         }
         if(message == null){
           message = SQL("""select * from custom_messages 
-        			where sentiment_id = {sentiment}""")
+        			where sentiment_id = {sentiment} and branch_id is null and business_id is null""")
         			.on("sentiment" -> sentiment.id).using(parser).singleOpt().getOrElse(null)
         }
         message

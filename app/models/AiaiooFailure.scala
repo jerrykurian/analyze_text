@@ -13,8 +13,9 @@ object AiaiooFailure {
     get[Pk[Long]]("id") ~
       get[String]("text") ~
       get[String]("source_number") ~
-      get[Int]("retried") map {
-        case id ~ text ~ source ~ retried => AiaiooFailure(id, text, source, retried)
+      get[Int]("retried") ~
+      get[Date]("created_at")map {
+        case id ~ text ~ source ~ retried ~ createdDate=> AiaiooFailure(id, text, source, retried, createdDate)
       }
   }
 
@@ -26,7 +27,7 @@ object AiaiooFailure {
   }
 
   def save(aiaiooFailure: AiaiooFailure) = {
-    val createdDate = new Date()
+    val createdDate = aiaiooFailure.createdDate
     val id: Long = DB.withConnection { implicit c =>
       SQL("""insert into aiaioo_failures(text,source_number,created_at,updated_at,retried) 
 	       values ({text},{source},{createdDate},{updatedDate},{retried})""").
@@ -40,17 +41,17 @@ object AiaiooFailure {
       case _ => -1
     }
     var failure = AiaiooFailure(if (id != -1) new Id(id) else null, aiaiooFailure.text,
-      aiaiooFailure.sourceNumber, 0)
+      aiaiooFailure.sourceNumber, 0, createdDate)
     failure
   }
 
   def retried(aiaiooFailureId: Long) {
-    val createdDate = new Date()
+	val updatedDate = new Date()
     DB.withConnection { implicit c =>
-      SQL("""update aiaioo_failures set retried=1 where id={id}""").
-        on("id" -> aiaiooFailureId).executeUpdate()
+      SQL("""update aiaioo_failures set retried=1, updated_at={updatedDate} where id={id}""").
+        on("updatedDate" -> updatedDate, "id" -> aiaiooFailureId).executeUpdate()
     }
   }
 }
 
-case class AiaiooFailure(id: Pk[Long], text: String, sourceNumber: String, retried: Int)
+case class AiaiooFailure(id: Pk[Long], text: String, sourceNumber: String, retried: Int, createdDate:Date)

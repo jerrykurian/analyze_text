@@ -38,7 +38,7 @@ object TextAnalyzer extends Actor {
       noun =>
         TrendingTopic.save(new TrendingTopic(null, noun, feedback.sentiment.getOrElse(null), 
             feedback.sentiment.get.value,
-          feedback.branch, new Date()), feedback)
+          feedback.branch, feedback.createdDate), feedback)
     }
   }
 

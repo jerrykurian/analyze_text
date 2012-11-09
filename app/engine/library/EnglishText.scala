@@ -17,7 +17,7 @@ class EnglishText(text: String) extends EnglishGrammer with SmsDictionary with S
 
         if(actualWord != null){
         	// apply the transformation
-	        val replacedWord = transformer(actualWord.toLowerCase())
+	        val replacedWord = transformer(actualWord)
 	
 	        var before = prefix
 	        var after = postfix

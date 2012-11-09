@@ -1,7 +1,12 @@
-general_failure=Sorry, we could not process the message. Please try again
-aiaioo_failure=Thanks we received your feedback but our service is  down for the moment , we will come back to you
-empty_message=Please provide a feedback message
+general_failure=Sorry, we could not process your message due to a temporary glitch. Please try again.
+aiaioo_failure=Thanks, we received your feedback but there is a temporary glitch in our service. Get free Cafe Latte for bill of Rs.125 or more at CCD. Just show code @ on your next visit.
+empty_message=Oops, we got a blank message. Please resend feedback message again.
 spell_check_file=/root/public/shoutout_engine/spellcheck/big.txt
 aiaioo_failure_cron_seconds=0
-aiaioo_failure_cron_minutes=30
-
+aiaioo_failure_cron_minutes=120
+google_api_key=AIzaSyAWWn3wfGngsBQMGrP5BvyFZmO7xIiMdJA
+google_url_shortener_url=https://www.googleapis.com/urlshortener/v1/url
+fb_redirect_url=http://www.shoppersays.com/fbshare/{0}
+unicel_url=http://www.unicel.in/SendSMS/sendmsg.php
+unicel_uname=CCDfeed
+unicel_password=b)a2e3S5
