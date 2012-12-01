@@ -1,0 +1,10 @@
+@(message: String)
+
+@template("Welcome") {
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/userinput.js")"></script>
+    <div id="message"></div>
+	<textarea id="userInput" rows="5">Enter your comment here...</textarea>
+	<button id="submitInput">SUBMIT
+	</button>
+    
+}
