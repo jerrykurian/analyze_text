@@ -1,0 +1,4 @@
+The application has the following external dependencies
+
+1) AIAIOO server api at http://aiaioo.com/ for performing the sentiment analysis. The relevant client jars are included in the lib folder
+2) Stanford Parser for extracting parts of speeches. The dependency jars are added in Build.scala
