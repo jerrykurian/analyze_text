@@ -69,8 +69,8 @@ object Global extends GlobalSettings {
     val pStrongMessage = CustomMessage(null,"""Thanks for your strong appreciation. Click here and share your feedback on Facebook {fburl}.
         Get a free Hot beverage for bill of $ 100 or more on your next visit. Just show code @""",positiveStrong,Some(savedBranch),Some(savedBusiness))
     val neutralMessage = CustomMessage(null,"Thanks for your feedback",neutral,Some(savedBranch),Some(savedBusiness))
-    val negativeMessage = CustomMessage(null,"Sorry for your bad experience",negativeSentiment,Some(savedBranch),Some(savedBusiness))
-    val negativeStrongMessage = CustomMessage(null,"Sorry for your bad experience, we apologize",negativeStrong,Some(savedBranch),Some(savedBusiness))
+    val negativeMessage = CustomMessage(null,"We apologize for your negative experience.",negativeSentiment,Some(savedBranch),Some(savedBusiness))
+    val negativeStrongMessage = CustomMessage(null,"We apologize for your negative experience.",negativeStrong,Some(savedBranch),Some(savedBusiness))
     
     CustomMessage.save(pWeakMessage)
     CustomMessage.save(pStrongMessage)
