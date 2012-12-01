@@ -17,8 +17,8 @@ object Global extends GlobalSettings {
     SentimentOverride.load()
     Logger.info("Scheduling Actor for cleanup")
     
-    val seconds:Int = Integer.valueOf(Messages("aiaioo_failure_cron_seconds"))
-    val min:Int = Integer.valueOf(Messages("aiaioo_failure_cron_minutes"))
+    val seconds:Int = Integer.valueOf(Messages("failure_cron_seconds"))
+    val min:Int = Integer.valueOf(Messages("failure_cron_minutes"))
     
     Akka.system().scheduler.schedule(seconds seconds, min minutes, new FailedMessageRetryService())
     Logger.info("scheduled to run every " + min + " minutes and " + seconds + " seconds")
@@ -63,8 +63,11 @@ object Global extends GlobalSettings {
     val negativeStrong = Sentiment.save(nStrong)
 
     import models.CustomMessage
-    val pWeakMessage = CustomMessage(null,"Thanks for your appreciation",positiveSentiment,Some(savedBranch),Some(savedBusiness))
-    val pStrongMessage = CustomMessage(null,"Thanks for your strong appreciation",positiveStrong,Some(savedBranch),Some(savedBusiness))
+    val pWeakMessage = CustomMessage(null,"""Thanks for your appreciation. Click here and share your feedback on Facebook {fburl}.
+        Get a free Hot beverage for bill of $ 100 or more on your next visit. Just show code @""",
+        positiveSentiment,Some(savedBranch),Some(savedBusiness))
+    val pStrongMessage = CustomMessage(null,"""Thanks for your strong appreciation. Click here and share your feedback on Facebook {fburl}.
+        Get a free Hot beverage for bill of $ 100 or more on your next visit. Just show code @""",positiveStrong,Some(savedBranch),Some(savedBusiness))
     val neutralMessage = CustomMessage(null,"Thanks for your feedback",neutral,Some(savedBranch),Some(savedBusiness))
     val negativeMessage = CustomMessage(null,"Sorry for your bad experience",negativeSentiment,Some(savedBranch),Some(savedBusiness))
     val negativeStrongMessage = CustomMessage(null,"Sorry for your bad experience, we apologize",negativeStrong,Some(savedBranch),Some(savedBusiness))
