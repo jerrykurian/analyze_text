@@ -3,12 +3,13 @@ import models.SmsLingo
 import models.SentimentOverride
 import akka.util.duration._
 import play.libs.Akka
-import services.aiaioo.FailedMessageRetryService
+import services.sentiments.FailedMessageRetryService
 import play.api.i18n.Messages
 
 object Global extends GlobalSettings {
 
   override def onStart(app: Application) {
+    initData()
     Logger.info("Loading all sms lingo in memory")
     SmsLingo.load()
     Logger.info("Loading sentiment overrides")
@@ -27,4 +28,17 @@ object Global extends GlobalSettings {
     Logger.info("Application shutdown...")
   }  
     
+  def initData(){
+    import models.Business
+    val business = new Business(null, "test")
+    val savedBusiness = Business.save(business)
+    
+    import models.Branch
+    val branch = new Branch(null,savedBusiness,"31321")
+    val savedBranch = Branch.save(branch)
+    
+    import models.Keyword
+    val keyword = new Keyword(null,"fb",Some(savedBusiness),savedBranch,"3213")
+    Keyword.save(keyword)
+  }
 }

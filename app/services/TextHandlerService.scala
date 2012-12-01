@@ -11,7 +11,7 @@ import models.Keyword
 import models.CustomMessage
 import play.api.Logger
 import models.SentimentOverride
-import models.AiaiooFailure
+import models.ActionFailure
 import play.api.i18n.Messages
 import models.TrendingTopic
 import models.MCoupon
@@ -48,12 +48,8 @@ object TextHandlerService {
       // Fix any sms lingo in the text and convert it to language text
       val smsLingoFixedText = splitText._2.convertSmsLingo()
 
-      Logger.info("Correcting spellings")
-      // Fix any spelling mistakes
-      val spellFixedText = smsLingoFixedText.correctSpellings()
-
       // Extract text sentiments and sent appropriate reply
-      handleSentimentExtraction(spellFixedText, splitText, mobileUser, keyword, timeOfText, retry)
+      handleSentimentExtraction(smsLingoFixedText, splitText, mobileUser, keyword, timeOfText, retry)
     } catch {
       case e: Throwable => {
         Logger.error(e.getMessage())
@@ -94,7 +90,7 @@ object TextHandlerService {
       case e: Throwable => {
         Logger.error(e.getMessage())
         // Store the failed text for retry
-        AiaiooFailure.save(AiaiooFailure(null, splitText._1.toLowerCase() + " " + splitText._2, mobileUser.number, 0, timeOfText))
+        ActionFailure.save(ActionFailure(null, splitText._1.toLowerCase() + " " + splitText._2, mobileUser.number, 0, timeOfText))
         (false, Messages("aiaioo_failure"))
       }
     }

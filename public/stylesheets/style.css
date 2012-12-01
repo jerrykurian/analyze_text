@@ -1,0 +1,47 @@
+body {
+	margin:	0px;
+	clear: both;
+	position: absolute;
+	height: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#content {
+	height: 80%;
+}
+
+header {
+	background-color: #f5f5f5;
+	border-bottom: 2px solid #949aa9;
+}
+
+#userInput {
+	margin: 0px auto;
+	width: 40%;
+	border: 2px solid #999999;
+	display: block;
+	border-radius: 5px;
+	margin-top: 2%;
+	font-family: Tahoma, sans-serif;
+}
+
+#submitInput {
+	margin: 0px auto;
+	display: block;
+	margin-top:	2%;
+	background-color: #0198E1;
+	border-radius : 5px;
+	border: 2px solid #0147FA;
+	padding: 5px;
+	margin-left: 48%;
+}
+
+#message {
+	margin:	0px auto;
+	margin-top: 1%;
+	text-align: center;
+	height: 5%;
+}

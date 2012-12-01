@@ -40,6 +40,20 @@ object CustomMessage{
         message
     }
   }
+  
+  def save(customMessage: CustomMessage){
+    val createdDate = new Date()
+    val id:Long = DB.withConnection {implicit c =>
+	   SQL("""insert into custom_messages(message,sentiment_id,branch_id,business_id,created_at,updated_at)
+			   		values ({message},{sentiment},{branch},{business},{createdDate},{updatedDate})""").
+	   on("business" -> customMessage.message,"sentiment" -> customMessage.sentiment.id, 
+	       "branch" -> customMessage.branch.map{_.id}.getOrElse(null),"business" -> customMessage.business.map{_.id}.getOrElse(null),
+	       "createdDate" -> createdDate,"updatedDate" -> createdDate).executeInsert()
+	} match {
+	  case Some(long) => long
+	  case _ => -1
+	}
+  }
 }
 
 case class CustomMessage(id:Pk[Long], message:String, sentiment:Sentiment, branch:Option[Branch],

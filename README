@@ -1,0 +1,23 @@
+Objective and scope
+1) The project will accept a user feedback via a smart phone web app.
+2) Analyze the feedback and identify if the sentiment expressed is positive or negative
+3) Send back appropriate response expressing satisfaction or regret to the user
+4) Attach an m-coupon with the response
+5) Point user to an FB app (not included) for sharing,  in case they sent a positive feedback
+6) Analyze the feedback further to identify the topic of feedback.
+7) Send an alert notification to a contact at retailer, in case of negative feedback
+
+Things not in scope
+1) A web based dashboard can be created to present the feedbacks and actionable items for managers. This will be out of scope of the project
+
+Usage of typesafe stack
+The project will use the entire typesafe stack consisting of
+1) Scala Language for coding
+2) Play framework for receiving and responding to user requests
+3) Anorm for persistence
+4) Akka for scheduling and asynchronous message handling
+Code will rely on functional programming for manipulating and transforming text.
+
+External Dependencies
+1) For extracting parts of speeches
+2) For sentiment analysis, a third party API will be used

@@ -7,6 +7,3 @@ aiaioo_failure_cron_minutes=120
 google_api_key=AIzaSyAWWn3wfGngsBQMGrP5BvyFZmO7xIiMdJA
 google_url_shortener_url=https://www.googleapis.com/urlshortener/v1/url
 fb_redirect_url=http://localhost:8080/fbshare/{0}
-unicel_url=http://www.unicel.in/SendSMS/sendmsg.php
-unicel_uname=CCDfeed
-unicel_password=b)a2e3S5

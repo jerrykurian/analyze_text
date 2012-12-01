@@ -3,7 +3,7 @@ import engine.library.aiaioo.SentimentAnalyzer
 import play.api.Logger
 import models.Sentiment
 
-class EnglishText(text: String) extends EnglishGrammer with SmsDictionary with SpellCheck with Text{
+class EnglishText(text: String) extends EnglishGrammer with SmsDictionary with Text{
   var treeRepresentationOfText: String = ""
   
   private def transform(textToTransform: String, transformer: String => String): String = {
@@ -37,10 +37,9 @@ class EnglishText(text: String) extends EnglishGrammer with SmsDictionary with S
     transform(text, replace)
   }
 
-  def correctSpellings(): String = {
-    transform(text, correct)
-  }
-
+  /*
+   * This function will extract all the nouns in a text
+   */
   def nouns() : List[String] = {
     if(treeRepresentationOfText == null || treeRepresentationOfText.length()==0) {
      treeRepresentationOfText = createGrammarTree(text) 
@@ -48,6 +47,9 @@ class EnglishText(text: String) extends EnglishGrammer with SmsDictionary with S
     extractNouns(treeRepresentationOfText)
   }
   
+  /*
+   * This function will extract the sentiments for a text
+   */
   def extractSentiments(): EnglishText = {
     allSentiments = SentimentAnalyzer.analyzeSentiment(text)
 

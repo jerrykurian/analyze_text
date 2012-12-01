@@ -3,6 +3,7 @@ import play.api.Play.current
 import anorm._
 import play.api.db._
 import anorm.SqlParser._
+import java.util.Date
 
 object Keyword {
 
@@ -30,6 +31,23 @@ object Keyword {
       implicit connection =>
         SQL("select * from keywords where keyword like {keyword}").on("keyword" -> keyword).using(parser).single()
     }
+  }
+  
+   def save(keyword: Keyword)={
+    val createdDate = new Date()
+    val id:Long = DB.withConnection {implicit c =>
+	   SQL("""insert into keywords(keyword,business_id,branch_id,mobile_number,created_at,updated_at)
+			   		values ({keyword},{business},{branch},{mobilenumber},{createdDate},{updatedDate})""").
+	   on("keyword" -> keyword.keyword, "business" -> keyword.business.map{_.id}.getOrElse(null),
+	       "branch" -> keyword.branch.id, "mobilenumber" -> keyword.mobileNumber,
+	       "createdDate" -> createdDate,"updatedDate" -> createdDate).executeInsert()
+	} match {
+	  case Some(long) => long
+	  case _ => -1
+	}
+	
+	new Keyword(if(id != -1) new Id(id) else null, keyword.keyword, keyword.business, keyword.branch, keyword.mobileNumber)
+
   }
 }
 
