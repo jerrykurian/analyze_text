@@ -14,7 +14,7 @@ object Application extends Controller {
   def feedback = Action {implicit request =>
     Logger.info("Got feedback")
     var text = request.body.asFormUrlEncoded.get("text")(0)
-    var service = TextHandlerService.handle("007", text, new Date())
+    var service = TextHandlerService.handle("007", "fb " + text, new Date())
     Ok(service._2)
   }
 }

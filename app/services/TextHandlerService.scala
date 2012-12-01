@@ -139,6 +139,7 @@ object TextHandlerService {
       if (coupon != null) transformedMessage = transformedMessage.replaceAll("""@""", coupon.coupon_code)
     }
 
+    Logger.info("Got the message " + transformedMessage)
     (true, transformedMessage)
   }
   

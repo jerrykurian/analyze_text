@@ -46,7 +46,7 @@ object CustomMessage{
     val id:Long = DB.withConnection {implicit c =>
 	   SQL("""insert into custom_messages(message,sentiment_id,branch_id,business_id,created_at,updated_at)
 			   		values ({message},{sentiment},{branch},{business},{createdDate},{updatedDate})""").
-	   on("business" -> customMessage.message,"sentiment" -> customMessage.sentiment.id, 
+	   on("message" -> customMessage.message,"sentiment" -> customMessage.sentiment.id, 
 	       "branch" -> customMessage.branch.map{_.id}.getOrElse(null),"business" -> customMessage.business.map{_.id}.getOrElse(null),
 	       "createdDate" -> createdDate,"updatedDate" -> createdDate).executeInsert()
 	} match {

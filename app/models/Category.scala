@@ -20,6 +20,16 @@ object Category{
     }
   }
   
+  def save(category:Category){
+    val createdDate = new Date()
+     DB.withConnection {implicit c =>
+        SQL("""insert into categories(id,name,created_at,updated_at)
+			   		values ({id},{name},{createdDate},{updatedDate})""").
+			   		on("id" -> category.id.get, "name" -> category.name,
+			   		    "createdDate"->createdDate,"updatedDate"->createdDate).executeInsert()
+     }
+  }
+  
   def save(feedback:Feedback, category:Category){
      DB.withConnection {implicit c =>
         SQL("""insert into feedback_categories(feedback_id,category_id,branch_id)

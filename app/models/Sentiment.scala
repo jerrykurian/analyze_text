@@ -35,6 +35,22 @@ object Sentiment {
         SQL("select * from sentiments where value = {value}").on("value" -> value).using(parser).single()
     }
   }
+  
+  def save(sentiment: Sentiment)={
+    val createdDate = new Date()
+    val id:Long = DB.withConnection {implicit c =>
+	   SQL("""insert into sentiments(name,value,created_at,updated_at)
+			   		values ({name},{value},{createdDate},{updatedDate})""").
+	   on("name" -> sentiment.name,"value" -> sentiment.value,
+	       "createdDate" -> createdDate,"updatedDate" -> createdDate).executeInsert()
+	} match {
+	  case Some(long) => long
+	  case _ => -1
+	}
+	
+	new Sentiment(if(id != -1) new Id(id) else null,
+	   sentiment.name,sentiment.value)
+  }
 
   // The sentiment to be between -1-0-1 since aiaioo api does not give strong negative or positive
   def nameToValue(name: String) = {
