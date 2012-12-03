@@ -37,6 +37,7 @@ header {
 	border: 2px solid #0147FA;
 	padding: 5px;
 	margin-left: 48%;
+	cursor: pointer;
 }
 
 #message {
