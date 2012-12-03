@@ -27,7 +27,7 @@ The code is organized in the play format with the following major components
 5) The UI view templates are in the "views" package
 
 Controllers
-The controllers make use of the standard Play controllers. The controller class for handling Feedbacks is Feedback.scala
+The controllers make use of the standard Play controllers. The controller class for creating and listing Feedbacks is Feedback.scala
 
 Engine
 The text analysis engine library code has the classes that analyzes text. It does so using class EnglishText. The EnglishText class represents 
@@ -52,3 +52,9 @@ The services also includes "sentiments.FailedMessageRetryService" that creates a
 
 The "urlshortener.GoogleShortener" class calls the external Google URL shortener api to get a shortener url to FB app url, which can be 
 sent as a response to a positive message
+
+Dependencies
+The external dependencies required for the project are mentioned in the DEPENDENCIES file located adjacent to this one
+
+HOW TO
+A list of answers to how to start, use the app is mentioned in the HOWTO file located adjacent to this one
