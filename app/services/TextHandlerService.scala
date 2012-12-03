@@ -72,8 +72,7 @@ object TextHandlerService {
         // Store the feedback text along with its corrected format
         val userFeedback = new Feedback(null, splitText._2, mobileUser,
           Some(Sentiment.findByValue(Sentiment.nameToValue(sentence._2))),
-          keyword.branch, timeOfText,
-          sentence._1, Sentiment.nameToScore(sentence._2))
+          keyword.branch, timeOfText, Sentiment.nameToScore(sentence._2))
 
         val feedback = Feedback.save(userFeedback)
 

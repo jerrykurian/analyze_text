@@ -1,0 +1,33 @@
+@(feedbacks: Seq[Feedback])
+<!--  start table-content  -->
+@dashboard("List Of All Feedbacks","All Feedbacks"){
+<div id="table-content">
+			
+				<!--  start product-table ..................................................................................... -->
+				<form id="mainform" action="">
+				<table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+				<tr>
+					<th class="table-header-check"><a id="toggle-all" ></a> </th>
+					<th class="table-header-repeat line-left minwidth-1"><a href="">Received Date</a>	</th>
+					<th class="table-header-repeat line-left minwidth-1"><a href="">Message</a></th>
+					<th class="table-header-repeat line-left minwidth-1"><a href="">Sentiment</a></th>
+				</tr>
+				@feedbacks.map{ feedback =>
+				<tr>
+					<td><input  type="checkbox"/></td>
+					<td>@feedback.createdDate</td>
+					<td>@feedback.message</td>
+					<td>@feedback.sentiment.getOrElse(null).name</td>
+				</tr>
+				}	
+				
+				</table>
+				<!--  end product-table................................... -->
+				</form>
+			</div>
+<!--  end content-table  -->
+
+
+
+<div class="clear"></div>
+}				

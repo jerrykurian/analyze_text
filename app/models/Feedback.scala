@@ -13,12 +13,12 @@ object Feedback{
       get[Pk[Long]]("user_id") ~
       get[Pk[Long]]("branch_id") ~
       get[Date]("created_at") ~
-      get[String]("corrected_text") ~
-      get[Int]("sentimentScore") map{
-      case pk ~ message ~ sentiment ~ user ~ branch ~ createdDate ~ correctedText ~ score => Feedback(pk, message, 
+      get[Int]("sentiment_score") map{
+      case pk ~ message ~ sentiment ~ user ~ branch ~ createdDate ~ score => Feedback(pk , message, 
           User.findById(user),
           if (sentiment.getOrElse(null) != null) Some(Sentiment.findById(sentiment.get)) else None, 
-          Branch.findById(branch), createdDate, correctedText, score)
+          Branch.findById(branch), createdDate, 
+          score)
     }
   }
   
@@ -36,8 +36,7 @@ object Feedback{
 	}
 	
 	new Feedback(if(id != -1) new Id(id) else null,
-	    feedback.message, feedback.user, feedback.sentiment, feedback.branch, feedback.createdDate, 
-	    feedback.correctedText, feedback.sentimentScore)
+	    feedback.message, feedback.user, feedback.sentiment, feedback.branch, feedback.createdDate, feedback.sentimentScore)
   }
   
   def findById(id: Pk[Long]): Feedback = {
@@ -46,7 +45,14 @@ object Feedback{
         SQL("select * from feedbacks where id = {id}").on("id" -> id.get).using(parser).single()
     }
   }
+  
+  def findAll() = {
+    DB.withConnection { implicit c =>
+      SQL("Select * from feedbacks")
+        .as(parser *)
+    }
+  }
 }
 
 case class Feedback(id:Pk[Long] = NotAssigned, message:String, user:User, sentiment:Option[Sentiment],
-    branch:Branch, createdDate:Date, correctedText:String, sentimentScore:Int)
+    branch:Branch, createdDate:Date, sentimentScore:Int)

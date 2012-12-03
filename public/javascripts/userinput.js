@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var input = $("#userInput").val();
 		$.ajax({
 			async: false,
-			url: "handleMessage",
+			url: "record",
 			type: "POST",
 			data: {text : input},
 			success : function(data){

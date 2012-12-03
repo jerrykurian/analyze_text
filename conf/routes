@@ -3,9 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /feedback                           controllers.Feedback.index
+GET     /feedback/create                         controllers.Feedback.create
+GET     /feedback/list                           controllers.Feedback.list
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-POST     /handleMessage               controllers.Feedback.record
+POST     /feedback/record               controllers.Feedback.record

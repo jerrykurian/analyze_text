@@ -5,11 +5,12 @@ The app is a standard Playframework 2.0.4 application that can be run by startin
 
 Use the application
 
-To make use of the application open the URL http://localhost:9000/feedback in the browser. Use the form to send messages. A typical
+To make use of the application open the URL http://localhost:9000/feedback/create in the browser. Use the form to send feedbacks. A typical
 positive message will be "I love the coffee at this place". Which should result in a response 
 "Thanks for your appreciation. Click here and share your feedback on Facebook http://localhost:8080/fbshare/1. Get a free Hot beverage for bill of $ 100 or more on your next visit. Just show code @"
 
 A negative feedback message could be "I hate the coffee at this place". Which should result in a response
 "We apologize for your negative experience."
 
+You can view a list of feedbacks along with its sentiments at http://localhost:9000/feedback/list
  

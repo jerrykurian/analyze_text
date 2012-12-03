@@ -32,7 +32,7 @@ object TextAnalyzer extends Actor {
   }
 
   private def extractTrendingTopics(feedback: Feedback) {
-    val nouns = feedback.correctedText.nouns()
+    val nouns = feedback.message.nouns()
     Logger.info("Storing topic")
     nouns.foreach {
       noun =>
@@ -45,7 +45,7 @@ object TextAnalyzer extends Actor {
   val defaultCategory = Category.findById(new Id(999))
   private def extractCategories(feedback: Feedback) {
     val categoryKeywords = CategoryKeyword.findAll()
-    val lowerCasedText = feedback.correctedText.toLowerCase()
+    val lowerCasedText = feedback.message.toLowerCase()
     Logger.info("Extracting categories")
 
     var addedToCat = false;

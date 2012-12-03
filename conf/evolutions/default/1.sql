@@ -109,6 +109,7 @@ CREATE TABLE `feedback_topics` (
 CREATE TABLE `feedbacks` (
   `id` int(11) NOT NULL auto_increment,
   `message` varchar(255) default NULL,
+  `corrected_text` varchar(255) default NULL,
   `user_id` int(11) default NULL,
   `sentiment_id` int(11) default NULL,
   `branch_id` int(11) default NULL,
