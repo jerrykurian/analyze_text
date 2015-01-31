@@ -80,7 +80,7 @@ object TextHandlerService {
 
         // extractTrendingTopics(feedback, sentence._3)
         // Pass on the feedback to the text analyzer, which will extract the 
-        // trending topics asynchrounously
+        // trending topics asynchronously
         TextAnalyzer ! feedback
       })
       // Find out the message that has to be sent in reply
